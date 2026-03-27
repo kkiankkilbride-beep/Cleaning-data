@@ -8,3 +8,5 @@ mappingconsistencycleaner.py - makes all associations consistent, i.e. neutralyo
 
 standardized_clean_RGs_CGSC3601.csv is the subsequent dataset
 
+WEKAdataset.csv is the data used in Weka
+
