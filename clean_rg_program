@@ -1,0 +1,36 @@
+"""
+
+this is code to clean up the data set
+
+this CSV data clean up will import pandas
+
+CGSC3601
+
+Kian Kilbride 101267969
+Danielle Picozzi 101301843
+Jose Rodriguez 101104860
+
+"""
+
+import pandas as pd
+
+df = pd.read_csv('clean_RGs_CGSC3601.csv')
+
+filter_df = df[df['TaskName'].isin(['RG1_YN', 'RG1_YH', 'RG2_YH', 'RG2_YN'])].copy()
+
+#included in second included to ensure we are only working with 'correct results'
+filter_df = filter_df[filter_df['correct'] != 0]
+
+check_column = [col for col in filter_df.columns if col != 'stim2']
+column_nas = filter_df[check_column].columns[filter_df[check_column].isna().any()].tolist()
+
+clean_df = filter_df.drop(columns=column_nas)
+
+# saved as 'clean_RGs_CGSC3601.csv' for first clean, saved as 'WEKA_RGs_CGSC3601.csv' for second
+clean_df.to_csv('WEKA_RGs_CGSC3601.csv', index=False)
+
+print("Original - First 5 Rows")
+print(df.head())
+
+print("Cleaned Data - First 5 Rows")
+print(clean_df.head())
